@@ -1,3 +1,6 @@
+
+// Time complexity O(n*m)
+// convert string 1st into string2  with min number of operation
 import java.util.*;
 
 public class dynamic12 {
@@ -42,5 +45,6 @@ public class dynamic12 {
         }
         int res = allSolution(w1, w2, n, m, dp);
         System.out.println(res);
+        sc.close();
     }
 }
