@@ -1,0 +1,204 @@
+Ranges that we should keep in mind
+-10^9 < int <10^9
+-10^12 < long < 10^12
+-10^18 < long long int < 10^18
+---------------------------------------------------
+
+Calculation Order (implicit conversion) :
+Double >float> long long int >long int >int >char
+ex:= 'c'+1 => (int)
+
+--------------------------------------------------
+long long (LL)
+long (L)
+
+---------------------------------------------
+(INT_MIN,INT_MAX)
+(LONG_MIN,LONG_MAX)
+(LLONG_MIN,LLONG_MIN)
+
+
+
+-------------------------------------------
+string str
+str1+str2  (string concatenation)
+str1==str2 (string comparison)
+str[i] (to access any character at index i)
+str.size()  (return the length of string)
+getline(cin,str)  (take whole line as string)
+str.push_back()   (insert the character into string)
+------------------------------------------
+if we have to take string input after taking input using cin
+
+cin>>x
+cin.ignore()
+getline(cin,s)
+
+----------------------------------------------
+Arraya and  size limits
+
+int n
+cin>>n
+int a[n];
+
+int a_2d[n][m];
+(10^5 size array locally is valid ) but globally  it can take (10^7)
+how to pass One d array 
+
+someFunction (int a[]) = (here array is alredy taking by refrence)
+someFuntion  (int a[][this size We have to give always])
+
+--------------------------------------------------
+STL
+
+pair<int,int> p={1,3};
+p={1,2}; // this is also oneway of doing that
+p.first=10;
+p.second=90;
+cout<<p.first<<" "<<p.second<<endl;
+
+------------------------------------------------------------------
+VECTOR
+
+vector<int> v={10,30,40};
+vector<int>v(sizeOfVector,valueWithwhich you want to initialize);
+v.push_back()  => (push element at the end)
+v.pop_back()  => (pop last element from the end)
+v[i] =>(to access index in the vector)
+v.size() => (get size of vector)
+
+-----------------------------------------------------------------
+
+SORTED SET ( take O(logN) for everything) (unique value)
+
+set<int>s={1,2,4,89,-1}; // (it will maintain sorted order)(value should be sortable)
+s.insert(value): Inserts a value into the set. If the value already exists, it does nothing.
+s.erase(value): Removes a value from the set.
+s.find(value): Returns an iterator pointing to the given value if it exists, otherwise it returns end().
+s.size(): Returns the number of elements in the set.
+s.empty(): Checks if the set is empty.
+s.begin(): Returns an iterator pointing to the first element.
+s.end(): Returns an iterator pointing to the past-the-end element. 
+s.clear(): Removes all elements from the set.
+
+unordered_set<value>s; (here all operation takes O(1))
+
+mutiset<value>s;
+--------------------------------------------------------------------------------------
+
+
+MAP (take O(logN)) for everything (key are stored in sorted oreder)
+ map<int,string>m; (key should be sortable)
+two ways of inserting (in c++ key,values are store in the form of pair)
+ m.insert({key,value});
+ m[key]=value
+
+Two ways of printing map
+for(auto &p:m){
+      cout<<p.first<<" "<<p.second<<endl;
+    }
+
+for(auto it=m.begin();it!=m.end();it++){
+      cout<<it->
+    first<<" "<<it->second<<endl;
+    }
+
+auto it=m.find(key) (if key exist then it will point to that key ,otherwise it will return m.end())
+m.erase(key/it)        (if key will exist then it will delete the )
+m.clear()
+
+if key is string  then timeComplexity will be  O(stringsize * log(n))
+
+------------------------------------------------------------------------------------------------
+
+UNORDERED_MAP (every thing takes O(1))
+all_funtions are same
+In un oredered map we can only use (all primitive types and string as key) where as in map we can take any datatype
+unordered_map<key,value>m;
+
+
+
+-----------------------------------------------------------------------------------------
+Iterator
+
+container_name.begin() =>points to oth Index or First element in container
+container_name.end() => points to location after lastElement , in container
+
+it++ => nextIterator (valid for all container)
+it+1 => nextLocation(valid only in case of vector)
+
+
+---------------------------------------------------------------------------------------------
+Stack and Queue (all operation of O(1))
+
+stack<datatype> s;
+s.push(value) =>push value (void) 
+s.pop() => remove top element from stack (void)
+s.top() => return top element (int)
+s.empty()  =>check if stack is empty (bool)
+s.size()
+
+queue<datatype> q;
+q.push(value);
+q.pop()
+q.front() =>return the first element in the queue(int)
+q.empty()
+q.size()
+
+
+----------------------------------------------------------------------------------------------
+
+Inbuilt sorting and Comparator
+
+sort( jha se sorting start karni hai uska address, jha tak sorting kerni hai usse ak agla address ,comparator_funtion); (increasing order)
+
+comparator_funtion(){
+  jb_swap kerna hai toh false return karo
+  jochiz chahiye  usi order may return kar do (a.first<a.second)
+}
+
+---------------------------------------------------------------------------------------------------
+priority_queue<anyDtatype>pq; (by default maxHeap)
+priority_queue<anydatatype,vector<anydatatype>,greate<anydatatype> >pq ; (minHeap)
+pq.push(value)
+pq.top()
+pq.pop()
+pq.size()
+pq.empty()
+
+
+class Student{
+public:
+  string name;
+  string rollNumber;
+
+  Student(string name, string rollNumber)
+  {
+    this->name = name;
+    this->rollNumber = rollNumber;
+  }
+};
+
+auto com = [](Student s1, Student s2)
+{
+  return s1.name > s2.name;
+};
+int main()
+{
+  priority_queue<Student, vector<Student>, decltype(com)> pq(com);
+  pq.push(Student("Ammar", "2021bcs0082"));
+  pq.push(Student("Kaleem", "2021343439"));
+
+  while (pq.empty() == false)
+  {
+    Student s = pq.top();
+
+    pq.pop();
+    cout << s.name << " " << s.rollNumber << endl;
+  }
+
+  return 0;
+}
+
+
+
